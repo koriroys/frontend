@@ -1,25 +1,26 @@
----
 language: node_js
 node_js:
-  - "4"
-
+- '4'
 sudo: false
-
 cache:
   directories:
-    - $HOME/.npm
-    - $HOME/.cache # includes bowers cache
-
+  - "$HOME/.npm"
+  - "$HOME/.cache"
 before_install:
-  - npm config set spin false
-  - npm install -g bower
-  - bower --version
-  - npm install phantomjs-prebuilt
-  - node_modules/phantomjs-prebuilt/bin/phantomjs --version
-
+- npm config set spin false
+- npm install -g bower
+- bower --version
+- npm install phantomjs-prebuilt
+- node_modules/phantomjs-prebuilt/bin/phantomjs --version
 install:
-  - npm install
-  - bower install
-
+- npm install
+- bower install
 script:
-  - npm test
+- npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: QIH+UldQQpA/xWMt7yBbwRnMxjdxTNNWvAZMbXkCfAxEA0u3+z7+mA1eFX8IjRtf6SQkoWgy6xqj9vX+TtwL4hPlYVOGqKlE8G8eKd0GLfKZg3aNlU2forfBOsZxDbFY0sffPSpf9/TSIsbTlK1SrcNIoDGCzzPPKi9+4zEY/cnWWxVEWUFRms8+5vTq7lY1eDg460A2TYOGroBTs5mU92MV0OM9H+Ds324lFXST3nCbBUKqXu3t2AzycDKw9enBVu29+cauIPWfJdSnVmWc/MLj5w/f/JV7thKRIRRxHJGNFuZXBuIx5+3f/rGE2YctnJFKD1mRHHfiSH7qZzJGZbv5D9IvDSagccjiX8zUiCcDNclFFw890eCWrT70BxPL70MpU7LfXo/y5cUfvKAgH2rq5f/x6uU5RXIvmMEBY/XxgfQNo+wQ7aG4qAYanyBUaJN3U5/VdN/bo6cfjcU1lSEjY+FFm8GqFqQPAN2LG4+QFg3soDe67B+r3DZOzQRnQ431C7oCR2T6RHJqwtnGvBIAM9akAx5LZ462+ptte/S2YkTQ5/IsMYcfZ/6bjzcZTU0+qDmtioq3Q8fD9tpeqPwSc3Y1o7A7JyH5sBC7GfIpfr9f8UuIdKkC8oOz2qCNxOB+1WDjOIB8YNGEl5AK/fQ5Sn14dbhViEKiOAKYMz8=
+  app: secret-crag-74202
+  on:
+    repo: koriroys/school-canteen-frontend
