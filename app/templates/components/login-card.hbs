@@ -1,15 +1,23 @@
+{{model.validations.attrs.email.isValid}}
+
 {{#x-card
   onsubmit=onsubmit
   title='Login'
-  buttonText='Login'}}
+  buttonText='Login'
+  buttonDisabled=validations.messages.length}}
+
   <div class="row">
     {{x-input
+      value=model.email
+      errors=(v-get model 'email' 'messages')
       classNames='col s12'
       type='email'
       label='Username'}}
   </div>
   <div class="row">
     {{x-input
+      value=model.password
+      errors=(v-get model 'password' 'messages')
       classNames='col s12'
       type='password'
       label='Password'}}
