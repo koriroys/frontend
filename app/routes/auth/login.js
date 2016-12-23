@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { buildValidations } from 'ember-cp-validations';
 import { email, password } from '../../utils/user-validations';
 
-const { getOwner, Object: EObject, Route } = Ember;
+const { get, getOwner, inject: { service }, Object: EObject, Route} = Ember;
 
 // can't figure out how to get the validations to work
 // in the login-card component, so just doing it here
@@ -18,6 +18,8 @@ const User = EObject.extend(Validations, {
 });
 
 export default Route.extend({
+  session: service(),
+
   model() {
     // container is required to lookup validations on the model
     // so we inject the container. More info at:
@@ -27,7 +29,9 @@ export default Route.extend({
 
   actions: {
     doLogin() {
-      alert('login attempted');
+      const user = get(this, 'currentModel');
+      const session = get(this, 'session');
+      session.authenticate('authenticator:school-canteen', user.email, user.password);
     }
   }
 });
