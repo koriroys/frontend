@@ -14,14 +14,9 @@ export const password = [
 ];
 
 export const passwordConfirmation = [
-  validator('presence', true),
-  validator('length', {
-    min: 8,
-    max: 255
-  }),
   validator('confirmation', {
     on: 'password',
-    message: 'Passwords do not match'
+    description: 'Confirmation'
   })
 ];
 
