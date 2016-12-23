@@ -1,13 +1,17 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
+const { get, Route } = Ember;
+
+export default Route.extend({
   model() {
     return this.store.createRecord('user');
   },
 
   actions: {
     doRegister() {
-      console.log("registration submitted");
+      get(this, 'currentModel').save().then(() => {
+        this.transitionTo('auth.login');
+      });
     }
   }
 });
