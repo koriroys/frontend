@@ -1,10 +1,8 @@
-{{model.validations.attrs.email.isValid}}
-
 {{#x-card
   onsubmit=onsubmit
   title='Login'
   buttonText='Login'
-  buttonDisabled=validations.messages.length}}
+  buttonDisabled=model.validations.messages.length}}
 
   <div class="row">
     {{x-input

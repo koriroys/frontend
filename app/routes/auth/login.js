@@ -19,6 +19,7 @@ const User = EObject.extend(Validations, {
 
 export default Route.extend({
   session: service(),
+  flashMessages: service(),
 
   model() {
     // container is required to lookup validations on the model
@@ -31,7 +32,20 @@ export default Route.extend({
     doLogin() {
       const user = get(this, 'currentModel');
       const session = get(this, 'session');
-      session.authenticate('authenticator:school-canteen', user.email, user.password);
+      session.authenticate('authenticator:school-canteen', user.email, user.password).then(() => {
+        // success
+        get(this, 'flashMessages').success('Logged in successfully');
+      }).catch((response) => {
+        const { errors } = response;
+
+        // Unauthorized
+        if (errors.mapBy('code').indexOf(401) >= 0) {
+          get(this, 'flashMessages').danger(
+            'There was a problem with your username or password, please try again');
+        } else {
+          get(this, 'flashMessages').danger('Server error');
+        }
+      });
     }
   }
 });
