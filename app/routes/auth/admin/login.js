@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { buildValidations } from 'ember-cp-validations';
-import { email, password } from '../../utils/user-validations';
+import { email, password } from '../../../utils/user-validations';
 
 const { get, getOwner, inject: { service }, Object: EObject, Route, set} = Ember;
 
@@ -13,7 +13,7 @@ const Validations = buildValidations({
 
 // make a simple user object, since we will depart from
 // standard CRUD calls for authentication
-const User = EObject.extend(Validations, {
+const AdminUser = EObject.extend(Validations, {
   email: '', password: ''
 });
 
@@ -25,15 +25,15 @@ export default Route.extend({
     // container is required to lookup validations on the model
     // so we inject the container. More info at:
     // http://offirgolan.github.io/ember-cp-validations/docs/modules/Basic.html
-    return User.create(getOwner(this).ownerInjection());
+    return AdminUser.create(getOwner(this).ownerInjection());
   },
 
   actions: {
     doLogin() {
-      const user = get(this, 'currentModel');
+      const adminUser = get(this, 'currentModel');
       const session = get(this, 'session');
-      session.authenticate('authenticator:school-canteen', user.email, user.password).then(() => {
-        // set(this, 'session.userType', 'user');
+      session.authenticate('authenticator:school-canteen-admin', adminUser.email, adminUser.password).then(() => {
+        set(this, 'session.userType', 'admin');
         // success
         get(this, 'flashMessages').success('Logged in successfully');
       }).catch((response) => {

@@ -1,6 +1,6 @@
 {{#x-card
   onsubmit=onsubmit
-  title='Login'
+  title=(if title title 'Login')
   buttonText='Login'
   buttonDisabled=model.validations.messages.length}}
 

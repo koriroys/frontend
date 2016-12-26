@@ -26,12 +26,12 @@ module.exports = function(environment) {
       namespace: 'api'
     },
     'ember-simple-auth': {
-      authenticationRoute: 'auth.login',
-      routeIfAlreadyAuthenticated: 'app.index',
-      routeAfterAuthentication: 'app.index'
+      // authenticationRoute: 'auth.login',
+      // routeIfAlreadyAuthenticated: 'app.index',
+      // routeAfterAuthentication: 'app.index'
     },
     flashMessageDefaults: {
-      timeout: 993000,
+      timeout: 3000,
       extendedTimeout: 375
     }
   };
@@ -39,8 +39,8 @@ module.exports = function(environment) {
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    ENV.APP.LOG_TRANSITIONS = true;
+    ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 

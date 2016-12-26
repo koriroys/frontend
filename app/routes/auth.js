@@ -6,7 +6,7 @@ export default Route.extend({
   session: inject.service(),
 
   beforeModel() {
-    if(get(this, 'session.isAuthenticated')) {
+    if ( get(this, 'session.isAuthenticated') ) {
       this.transitionTo('app.index');
     }
   }
