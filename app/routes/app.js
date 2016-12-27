@@ -2,13 +2,13 @@ import Ember from 'ember';
 import config from '../config/environment';
 import fetch from 'ember-network/fetch';
 
-const { get, Route, inject: { service }, set} = Ember;
+const { get, Route, inject: { service } } = Ember;
 
 export default Route.extend({
   session: service(),
 
   beforeModel() {
-    if(!get(this, 'session.isAuthenticated')) {
+    if ( !get(this, 'session.isAuthenticated') ) {
       this.transitionTo('auth.login');
     }
   },
@@ -21,7 +21,9 @@ export default Route.extend({
     }).then((raw) => {
       return raw.json().then((data) => {
         const currentUser = this.store.push(data);
-        set(this, 'session.currentUser', currentUser);
+        const session = this.get('session');
+        session.set('userType', get(currentUser, '_internalModel.modelName'));
+        session.set('currentUser', currentUser);
       });
     });
   }
