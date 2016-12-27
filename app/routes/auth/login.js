@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { buildValidations } from 'ember-cp-validations';
 import { email, password } from '../../utils/user-validations';
 
-const { get, getOwner, inject: { service }, Object: EObject, Route, set} = Ember;
+const { get, getOwner, inject: { service }, Object: EObject, Route } = Ember;
 
 // can't figure out how to get the validations to work
 // in the login-card component, so just doing it here

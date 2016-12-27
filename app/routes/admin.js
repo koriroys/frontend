@@ -2,7 +2,7 @@ import Ember from 'ember';
 import config from '../config/environment';
 import fetch from 'ember-network/fetch';
 
-const { get, Route, inject: { service }, set} = Ember;
+const { get, Route, inject: { service } } = Ember;
 
 export default Route.extend({
   session: service(),
@@ -30,7 +30,7 @@ export default Route.extend({
           session.set('currentAdminUser', currentAdminUser);
         });
       } else {
-        this.get('flashMessages').danger("Hey, you're not an admin!")
+        this.get('flashMessages').danger("Hey, you're not an admin!");
         this.transitionTo('/');
       }
     });
