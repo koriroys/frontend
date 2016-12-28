@@ -16,7 +16,6 @@ Router.map(function() {
   });
   this.route('app', function() {});
   this.route('admin', function() {
-
   });
 });
 

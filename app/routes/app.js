@@ -19,12 +19,17 @@ export default Route.extend({
         'Authorization': `Bearer ${this.get('session').get('session.content.authenticated.access_token')}`
       }
     }).then((raw) => {
-      return raw.json().then((data) => {
-        const currentUser = this.store.push(data);
-        const session = this.get('session');
-        session.set('userType', get(currentUser, '_internalModel.modelName'));
-        session.set('currentUser', currentUser);
-      });
+      if ( raw.ok ) {
+        return raw.json().then((data) => {
+          const currentUser = this.store.push(data);
+          const session = this.get('session');
+          session.set('userType', get(currentUser, '_internalModel.modelName'));
+          session.set('currentUser', currentUser);
+        });
+      } else {
+        this.get('flashMessages').danger("something went wrong");
+        this.transitionTo('/');
+      }
     });
   }
 });
