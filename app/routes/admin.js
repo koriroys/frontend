@@ -11,8 +11,6 @@ export default Route.extend({
   beforeModel() {
     if ( !get(this, 'session.isAuthenticated') ) {
       this.transitionTo('auth.admin.login');
-    } else if ( get(this, 'session.userType') === 'admin-user' ) {
-      this.transitionTo('/');
     }
   },
   afterModel() {
@@ -28,6 +26,7 @@ export default Route.extend({
           const session = this.get('session');
           session.set('userType', get(currentAdminUser, '_internalModel.modelName'));
           session.set('currentAdminUser', currentAdminUser);
+          this.store.adapterFor('application').set('namespace', "api/admin");
         });
       } else {
         this.get('flashMessages').danger("Hey, you're not an admin!");

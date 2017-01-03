@@ -1,0 +1,15 @@
+<button class="btn-flat green white-text">
+  Set menu for [this month]
+</button>
+{{outlet}}
+
+{{#x-card
+  buttonText='Logout'
+  onsubmit=(route-action 'logout')
+  title='Welcome to School Canteen!'}}
+
+  {{#user-info as |u|}}
+    Thanks for logging in <b>{{u.email}}</b>
+  {{/user-info}}
+
+{{/x-card}}

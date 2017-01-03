@@ -36,6 +36,7 @@ export default Route.extend({
         set(this, 'session.userType', 'admin');
         // success
         get(this, 'flashMessages').success('Logged in successfully');
+        this.transitionTo('admin.dashboard');
       }).catch((response) => {
         const { errors } = response;
 

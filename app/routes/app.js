@@ -10,6 +10,10 @@ export default Route.extend({
   beforeModel() {
     if ( !get(this, 'session.isAuthenticated') ) {
       this.transitionTo('auth.login');
+    } else {
+      if ( get(this, 'session.userType') === 'admin' ) {
+        this.transitionTo('admin.dashboard');
+      }
     }
   },
   afterModel() {
