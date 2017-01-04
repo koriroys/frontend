@@ -1,0 +1,14 @@
+<nav>
+  <div class="nav-wrapper">
+    {{#link-to 'admin.dashboard' class='brand-logo'}}
+      School Canteen Admin
+    {{/link-to}}
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li>
+        <a class="btn red white-text" onclick={{route-action 'logout'}}>
+          Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
